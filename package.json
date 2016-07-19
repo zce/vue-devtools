@@ -1,0 +1,23 @@
+{
+  "name": "vue-devtools",
+  "version": "2.0.4",
+  "description": "devtools for Vue.js!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zce/vue-devtools.git"
+  },
+  "keywords": [
+    "vue",
+    "devtools"
+  ],
+  "author": "iceStone <ice@micua.com> (http://blog.wedn.net/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zce/vue-devtools/issues"
+  },
+  "homepage": "https://github.com/zce/vue-devtools#readme",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
