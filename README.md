@@ -6,6 +6,7 @@ An electron devtools extension for debugging Vue.js applications.
 
 ## Usage
 
+### Installing
 In an electron proj
 
 ```bash
@@ -24,6 +25,23 @@ app.on('ready', () => {
   ....
 })
 ```
+
+### Uninstalling
+
+Running uniinstall in your `main.js`
+
+```javascript
+const { app, BrowserWindow } = require('electron')
+app.on('ready', () => {
+  ....
+  if (process.env.NODE_ENV !== 'production') {
+    require('vue-devtools').uninstall()
+  }
+  ....
+})
+```
+
+
 
 ## An npm package base on https://github.com/vuejs/vue-devtools
 
