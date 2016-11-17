@@ -15,10 +15,10 @@ exports.install = () => {
 exports.uninstall = () => {
   if (process.type === 'renderer') {
     console.log(`Uninstalling Vue Devtools from ${__dirname}`)
-    return electron.remote.BrowserWindow.removeDevToolsExtension('devtron')
+    return electron.remote.BrowserWindow.removeDevToolsExtension('Vue.js devtools')
   } else if (process.type === 'browser') {
     console.log(`Uninstalling Vue Devtools from ${__dirname}`)
-    return electron.BrowserWindow.removeDevToolsExtension('devtron')
+    return electron.BrowserWindow.removeDevToolsExtension('Vue.js devtools')
   } else {
     throw new Error('Vue Devtools can only be uninstalled from an Electron process.')
   }
