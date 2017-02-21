@@ -1,23 +1,22 @@
 {
   "name": "vue-devtools",
-  "version": "2.3.1-beta1",
-  "description": "devtools for Vue.js!",
+  "version": "3.0.8",
+  "description": "Electron devtools extension for debugging Vue.js applications.",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zce/vue-devtools.git"
   },
   "keywords": [
     "vue",
+    "vue.js",
+    "electron",
     "devtools"
   ],
-  "author": "iceStone <ice@micua.com> (http://blog.wedn.net/)",
+  "author": "iceStone <ice@micua.com> (http://micua.com/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/zce/vue-devtools/issues"
   },
-  "homepage": "https://github.com/zce/vue-devtools#readme",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  }
+  "homepage": "https://github.com/zce/vue-devtools#readme"
 }
