@@ -43,6 +43,6 @@ app.on('ready', () => {
 
 
 
-## An npm package base on https://github.com/vuejs/vue-devtools
+## npm package for electron base on https://github.com/vuejs/vue-devtools
 
-## Latest updated @ Jul 19, 2016
+## Latest updated @ Feb 21, 2017
