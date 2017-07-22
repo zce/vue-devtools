@@ -1,1 +1,167 @@
-!function(e){function n(t){if(o[t])return o[t].exports;var s=o[t]={i:t,l:!1,exports:{}};return e[t].call(s.exports,s,s.exports,n),s.l=!0,s.exports}var o={};n.m=e,n.c=o,n.i=function(e){return e},n.d=function(e,o,t){n.o(e,o)||Object.defineProperty(e,o,{configurable:!1,enumerable:!0,get:t})},n.n=function(e){var o=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(o,"a",o),o},n.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},n.p="",n(n.s=20)}({20:function(e,n){function o(e){return+e+""===e}function t(e){chrome.tabs.executeScript(e,{file:"/build/proxy.js"},function(n){n?console.log("injected proxy to tab "+e):c[e].devtools.postMessage("proxy-fail")})}function s(e,n,o){function t(n){if("log"===n.event)return console.log("tab "+e,n.payload);console.log("devtools -> backend",n),o.postMessage(n)}function s(o){if("log"===o.event)return console.log("tab "+e,o.payload);console.log("backend -> devtools",o),n.postMessage(o)}function r(){console.log("tab "+e+" disconnected."),n.onMessage.removeListener(t),o.onMessage.removeListener(s),n.disconnect(),o.disconnect(),c[e]=null}n.onMessage.addListener(t),o.onMessage.addListener(s),n.onDisconnect.addListener(r),o.onDisconnect.addListener(r),console.log("tab "+e+" connected.")}var c={};chrome.runtime.onConnect.addListener(function(e){var n,r;o(e.name)?(n=e.name,r="devtools",t(+e.name)):(n=e.sender.tab.id,r="backend"),c[n]||(c[n]={devtools:null,backend:null}),c[n][r]=e,c[n].devtools&&c[n].backend&&s(n,c[n].devtools,c[n].backend)}),chrome.runtime.onMessage.addListener(function(e,n){n.tab&&e.vueDetected&&(chrome.browserAction.setIcon({tabId:n.tab.id,path:{16:"icons/16.png",48:"icons/48.png",128:"icons/128.png"}}),chrome.browserAction.setPopup({tabId:n.tab.id,popup:e.devtoolsEnabled?"popups/enabled.html":"popups/disabled.html"}))})}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 104);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 104:
+/***/ (function(module, exports) {
+
+// the background script runs all the time and serves as a central message
+// hub for each vue devtools (panel + proxy + backend) instance.
+
+var ports = {}
+
+chrome.runtime.onConnect.addListener(function (port) {
+  var tab
+  var name
+  if (isNumeric(port.name)) {
+    tab = port.name
+    name = 'devtools'
+    installProxy(+port.name)
+  } else {
+    tab = port.sender.tab.id
+    name = 'backend'
+  }
+
+  if (!ports[tab]) {
+    ports[tab] = {
+      devtools: null,
+      backend: null
+    }
+  }
+  ports[tab][name] = port
+
+  if (ports[tab].devtools && ports[tab].backend) {
+    doublePipe(tab, ports[tab].devtools, ports[tab].backend)
+  }
+})
+
+function isNumeric (str) {
+  return +str + '' === str
+}
+
+function installProxy (tabId) {
+  chrome.tabs.executeScript(tabId, {
+    file: '/build/proxy.js'
+  }, function (res) {
+    if (!res) {
+      ports[tabId].devtools.postMessage('proxy-fail')
+    } else {
+      console.log('injected proxy to tab ' + tabId)
+    }
+  })
+}
+
+function doublePipe (id, one, two) {
+  one.onMessage.addListener(lOne)
+  function lOne (message) {
+    if (message.event === 'log') {
+      return console.log('tab ' + id, message.payload)
+    }
+    console.log('devtools -> backend', message)
+    two.postMessage(message)
+  }
+  two.onMessage.addListener(lTwo)
+  function lTwo (message) {
+    if (message.event === 'log') {
+      return console.log('tab ' + id, message.payload)
+    }
+    console.log('backend -> devtools', message)
+    one.postMessage(message)
+  }
+  function shutdown () {
+    console.log('tab ' + id + ' disconnected.')
+    one.onMessage.removeListener(lOne)
+    two.onMessage.removeListener(lTwo)
+    one.disconnect()
+    two.disconnect()
+    ports[id] = null
+  }
+  one.onDisconnect.addListener(shutdown)
+  two.onDisconnect.addListener(shutdown)
+  console.log('tab ' + id + ' connected.')
+}
+
+chrome.runtime.onMessage.addListener(function (req, sender) {
+  if (sender.tab && req.vueDetected) {
+    chrome.browserAction.setIcon({
+      tabId: sender.tab.id,
+      path: {
+        16: 'icons/16.png',
+        48: 'icons/48.png',
+        128: 'icons/128.png'
+      }
+    })
+    chrome.browserAction.setPopup({
+      tabId: sender.tab.id,
+      popup: req.devtoolsEnabled ? 'popups/enabled.html' : 'popups/disabled.html'
+    })
+  }
+})
+
+
+/***/ })
+
+/******/ });

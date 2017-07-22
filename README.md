@@ -1,12 +1,13 @@
 # vue-devtools
 
-An electron devtools extension for debugging Vue.js applications.
+> An electron devtools extension for debugging Vue.js applications.
 
 [![NPM](https://nodei.co/npm/vue-devtools.png)](https://nodei.co/npm/vue-devtools/)
 
 ## Usage
 
 ### Installing
+
 In an electron proj
 
 ```bash
@@ -41,8 +42,10 @@ app.on('ready', () => {
 })
 ```
 
+## License
 
+npm package for electron base on [vuejs/vue-devtools](https://github.com/vuejs/vue-devtools)
 
-## npm package for electron base on https://github.com/vuejs/vue-devtools
+## Latest updated
 
-## Latest updated @ Apr 16, 2017
+**@ Jul 22, 2017**

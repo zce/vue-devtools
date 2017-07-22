@@ -1,22 +1,22 @@
 {
   "name": "vue-devtools",
-  "version": "3.1.2",
+  "version": "3.1.6",
   "description": "Electron devtools extension for debugging Vue.js applications.",
+  "keywords": [
+    "devtools",
+    "electron",
+    "vue",
+    "vue.js"
+  ],
+  "homepage": "https://github.com/zce/vue-devtools#readme",
+  "bugs": {
+    "url": "https://github.com/zce/vue-devtools/issues"
+  },
+  "license": "MIT",
+  "author": "zce <w@zce.me> (https://zce.me/)",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zce/vue-devtools.git"
-  },
-  "keywords": [
-    "vue",
-    "vue.js",
-    "electron",
-    "devtools"
-  ],
-  "author": "iceStone <ice@micua.com> (http://micua.com/)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/zce/vue-devtools/issues"
-  },
-  "homepage": "https://github.com/zce/vue-devtools#readme"
+  }
 }

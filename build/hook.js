@@ -1,1 +1,177 @@
-!function(e){function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}var t={};n.m=e,n.c=t,n.i=function(e){return e},n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},n.p="",n(n.s=24)}({17:function(e,n,t){"use strict";function r(e){var n={},t={Vue:null,on:function(e,t){e="$"+e,(n[e]||(n[e]=[])).push(t)},once:function(e,t){function r(){this.off(e,r),t.apply(this,arguments)}e="$"+e,(n[e]||(n[e]=[])).push(r)},off:function(e,t){if(e="$"+e,arguments.length){var r=n[e];if(r)if(t)for(var o=0,i=r.length;o<i;o++){var u=r[o];if(u===t||u.fn===t){r.splice(o,1);break}}else n[e]=null}else n={}},emit:function(e){var t=this;e="$"+e;var r=n[e];if(r){var o=[].slice.call(arguments,1);r=r.slice();for(var i=0,u=r.length;i<u;i++)r[i].apply(t,o)}}};t.once("init",function(e){t.Vue=e}),t.once("vuex:init",function(e){t.store=e}),Object.defineProperty(e,"__VUE_DEVTOOLS_GLOBAL_HOOK__",{get:function(){return t}})}n.a=r},24:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r=t(17),o=document.createElement("script");o.textContent=";("+r.a.toString()+")(window)",document.documentElement.appendChild(o),o.parentNode.removeChild(o)}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 17:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_src_backend_hook__ = __webpack_require__(18);
+// This script is injected into every page.
+
+
+// inject the hook
+var script = document.createElement('script')
+script.textContent = ';(' + __WEBPACK_IMPORTED_MODULE_0_src_backend_hook__["a" /* installHook */].toString() + ')(window)'
+document.documentElement.appendChild(script)
+script.parentNode.removeChild(script)
+
+
+/***/ }),
+
+/***/ 18:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = installHook;
+// this script is injected into every page.
+
+/**
+ * Install the hook on window, which is an event emitter.
+ * Note because Chrome content scripts cannot directly modify the window object,
+ * we are evaling this function by inserting a script tag. That's why we have
+ * to inline the whole event emitter implementation here.
+ *
+ * @param {Window} window
+ */
+
+function installHook (window) {
+  var listeners = {}
+
+  var hook = {
+    Vue: null,
+
+    on: function on (event, fn) {
+      event = '$' + event
+      ;(listeners[event] || (listeners[event] = [])).push(fn)
+    },
+
+    once: function once (event, fn) {
+      event = '$' + event
+      function on () {
+        this.off(event, on)
+        fn.apply(this, arguments)
+      }
+      ;(listeners[event] || (listeners[event] = [])).push(on)
+    },
+
+    off: function off (event, fn) {
+      event = '$' + event
+      if (!arguments.length) {
+        listeners = {}
+      } else {
+        var cbs = listeners[event]
+        if (cbs) {
+          if (!fn) {
+            listeners[event] = null
+          } else {
+            for (var i = 0, l = cbs.length; i < l; i++) {
+              var cb = cbs[i]
+              if (cb === fn || cb.fn === fn) {
+                cbs.splice(i, 1)
+                break
+              }
+            }
+          }
+        }
+      }
+    },
+
+    emit: function emit (event) {
+      var this$1 = this;
+
+      event = '$' + event
+      var cbs = listeners[event]
+      if (cbs) {
+        var args = [].slice.call(arguments, 1)
+        cbs = cbs.slice()
+        for (var i = 0, l = cbs.length; i < l; i++) {
+          cbs[i].apply(this$1, args)
+        }
+      }
+    }
+  }
+
+  hook.once('init', function (Vue) {
+    hook.Vue = Vue
+  })
+
+  hook.once('vuex:init', function (store) {
+    hook.store = store
+  })
+
+  Object.defineProperty(window, '__VUE_DEVTOOLS_GLOBAL_HOOK__', {
+    get: function get () {
+      return hook
+    }
+  })
+}
+
+
+/***/ })
+
+/******/ });
