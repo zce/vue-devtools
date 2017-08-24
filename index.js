@@ -1,30 +1,32 @@
 const electron = require('electron')
 
+const EXT_NAME = 'Vue.js devtools';
+
 exports.install = () => {
   if (process.type === 'renderer') {
-    console.log(`Installing Vue.js devtools from ${__dirname}`)
+    console.log(`Installing ${EXT_NAME} from ${__dirname}`)
     if (electron.remote.BrowserWindow.getDevToolsExtensions &&
-        electron.remote.BrowserWindow.getDevToolsExtensions().devtron) return true
+        electron.remote.BrowserWindow.getDevToolsExtensions()[EXT_NAME]) return true
     return electron.remote.BrowserWindow.addDevToolsExtension(__dirname)
   } else if (process.type === 'browser') {
-    console.log(`Installing Vue.js devtools from ${__dirname}`)
+    console.log(`Installing ${EXT_NAME} from ${__dirname}`)
     if (electron.BrowserWindow.getDevToolsExtensions &&
-        electron.BrowserWindow.getDevToolsExtensions().devtron) return true
+        electron.BrowserWindow.getDevToolsExtensions()[EXT_NAME]) return true
     return electron.BrowserWindow.addDevToolsExtension(__dirname)
   } else {
-    throw new Error('Vue.js devtools can only be installed from an Electron process.')
+    throw new Error(`${EXT_NAME} can only be installed from an Electron process.`)
   }
 }
 
 exports.uninstall = () => {
   if (process.type === 'renderer') {
-    console.log(`Uninstalling Vue.js devtools from ${__dirname}`)
-    return electron.remote.BrowserWindow.removeDevToolsExtension('Vue.js devtools')
+    console.log(`Uninstalling ${EXT_NAME} from ${__dirname}`)
+    return electron.remote.BrowserWindow.removeDevToolsExtension(EXT_NAME)
   } else if (process.type === 'browser') {
-    console.log(`Uninstalling Vue.js devtools from ${__dirname}`)
-    return electron.BrowserWindow.removeDevToolsExtension('Vue.js devtools')
+    console.log(`Uninstalling ${EXT_NAME} from ${__dirname}`)
+    return electron.BrowserWindow.removeDevToolsExtension(EXT_NAME)
   } else {
-    throw new Error('Vue.js devtools can only be uninstalled from an Electron process.')
+    throw new Error(`${EXT_NAME} can only be uninstalled from an Electron process.`)
   }
 }
 
