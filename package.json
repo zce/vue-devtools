@@ -1,6 +1,6 @@
 {
   "name": "vue-devtools",
-  "version": "3.1.8",
+  "version": "3.1.9",
   "description": "An electron devtools extension for debugging Vue.js applications.",
   "keywords": [
     "zce"
@@ -26,10 +26,10 @@
     "url": "git+https://github.com/zce/vue-devtools.git"
   },
   "scripts": {
-    "prebuild": "rm -rf vender",
+    "prebuild": "yarn submodule && rm -rf vender",
     "build": "cd source && yarn build && cd .. && yarn vender",
-    "preinstall": "git submodule init && git submodule update && cd source && yarn && cd ..",
     "lint": "standard --fix",
+    "submodule": "git submodule init && git submodule update && cd source && yarn && cd ..",
     "test": "yarn lint && electron example/usage",
     "vender": "cp -r source/shells/chrome/ vender && rm -rf vender/src && rm -rf vender/webpack.config.js"
   },
