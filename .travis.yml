@@ -19,4 +19,5 @@ notifications:
     on_failure: change
 
 script:
-  - yarn test
+  - yarn lint
+  - yarn build
