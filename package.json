@@ -28,8 +28,7 @@
   "scripts": {
     "prebuild": "rm -rf vender",
     "build": "cd source && yarn build && cd .. && yarn vender",
-    "preinstall": "git submodule init && git submodule update",
-    "postinstall": "cd source && yarn && cd ..",
+    "preinstall": "git submodule init && git submodule update && cd source && yarn && cd ..",
     "lint": "standard --fix",
     "test": "yarn lint && electron example/usage",
     "vender": "cp -r source/shells/chrome/ vender && rm -rf vender/src && rm -rf vender/webpack.config.js"
