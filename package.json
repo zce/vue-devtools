@@ -1,12 +1,9 @@
 {
   "name": "vue-devtools",
   "version": "3.1.6",
-  "description": "Electron devtools extension for debugging Vue.js applications.",
+  "description": "An electron devtools extension for debugging Vue.js applications.",
   "keywords": [
-    "devtools",
-    "electron",
-    "vue",
-    "vue.js"
+    "zce"
   ],
   "homepage": "https://github.com/zce/vue-devtools#readme",
   "bugs": {
@@ -14,9 +11,41 @@
   },
   "license": "MIT",
   "author": "zce <w@zce.me> (https://zce.me/)",
-  "main": "index.js",
+  "files": [
+    "lib",
+    "vender"
+  ],
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "example": "example",
+    "test": "test"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zce/vue-devtools.git"
+  },
+  "scripts": {
+    "prebuild": "rm -rf vender",
+    "build": "cd source && yarn build && cd .. && yarn vender",
+    "preinstall": "git submodule init && git submodule update",
+    "postinstall": "cd source && yarn && cd ..",
+    "lint": "standard --fix",
+    "test": "yarn lint && electron example/usage",
+    "vender": "cp -r source/shells/chrome/ vender && rm -rf vender/src && rm -rf vender/webpack.config.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^1.7.6",
+    "standard": "^10.0.3"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "standard": {
+    "ignore": [
+      "source",
+      "vender"
+    ]
   }
 }

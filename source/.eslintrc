@@ -1,0 +1,11 @@
+{
+  "root": true,
+  "extends": [
+    "plugin:vue-libs/recommended"
+  ],
+  "globals": {
+    "bridge": true,
+    "chrome": true,
+    "localStorage": true
+  }
+}
