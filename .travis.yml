@@ -11,7 +11,7 @@ node_js:
   # - 6
   # - 7
   # - 8
-  - stable
+  - lts/*
 
 notifications:
   email:
