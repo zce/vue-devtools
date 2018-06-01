@@ -2,7 +2,6 @@
 <html>
 <head>
   <title>Welcome to Vue</title>
-  <script src="https://unpkg.com/vue"></script>
 </head>
 <body>
   <div id="app">
@@ -11,25 +10,20 @@
     <ul>
       <li>
         To learn more about Vue, visit
-        <a :href="docsURL" target="_blank">
-          {{ humanizeURL(docsURL) }}
-        </a>
+        <a :href="docsURL" target="_blank">{{ humanizeURL(docsURL) }}</a>
       </li>
       <li>
         For live help with simple questions, check out
-        <a :href="gitterURL" target="_blank">
-          the Gitter chat
-        </a>
+        <a :href="gitterURL" target="_blank">the Gitter chat</a>
       </li>
       <li>
         For more complex questions, post to
-        <a :href="forumURL" target="_blank">
-          the forum
-        </a>
+        <a :href="forumURL" target="_blank">the forum</a>
       </li>
     </ul>
   </div>
 
+  <script src="https://unpkg.com/vue"></script>
   <script>
     new Vue({
       el: '#app',
