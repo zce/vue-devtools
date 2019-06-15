@@ -1,8 +1,11 @@
 {
   "name": "vue-devtools",
-  "version": "5.0.0-beta.1",
+  "version": "5.1.0",
   "description": "An electron devtools extension for debugging Vue.js applications.",
   "keywords": [
+    "electron",
+    "vue-devtools",
+    "vuejs",
     "zce"
   ],
   "homepage": "https://github.com/zce/vue-devtools#readme",
