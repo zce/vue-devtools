@@ -2,6 +2,11 @@
 <html>
 <head>
   <title>Welcome to Vue</title>
+  <style>
+    #app {
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
   <div id="app">
@@ -34,7 +39,7 @@
         forumURL: 'http://forum.vuejs.org/'
       },
       methods: {
-        humanizeURL: function (url) {
+        humanizeURL (url) {
           return url
             .replace(/^https?:\/\//, '')
             .replace(/\/$/, '')
