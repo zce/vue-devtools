@@ -30,9 +30,9 @@
   },
   "scripts": {
     "submodule": "git submodule init && git submodule update && cd source && yarn && cd ..",
+    "postinstall": "yarn submodule",
     "vender": "cp -r source/shells/chrome/ vender && rm -rf vender/src && rm -rf vender/webpack.config.js",
-    "prebuild": "yarn submodule && rm -rf vender",
-    "build": "cd source && yarn build && cd .. && yarn vender",
+    "build": "rm -rf vender && cd source && yarn build && cd .. && yarn vender",
     "lint": "standard --fix",
     "test": "yarn lint && electron example/usage"
   },
