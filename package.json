@@ -29,12 +29,12 @@
     "url": "git+https://github.com/zce/vue-devtools.git"
   },
   "scripts": {
-    "submodule": "git submodule init && git submodule update && cd source && yarn && cd ..",
-    "postinstall": "yarn submodule",
+    "setup": "git submodule init && git submodule update && cd source && yarn && cd .. && yarn",
     "vender": "cp -r source/shells/chrome/ vender && rm -rf vender/src && rm -rf vender/webpack.config.js",
     "build": "rm -rf vender && cd source && yarn build && cd .. && yarn vender",
     "lint": "standard --fix",
-    "test": "yarn lint && electron example/usage"
+    "test": "yarn lint && electron example/usage",
+    "ship": "yarn publish --registry=https://registry.yarnpkg.com"
   },
   "devDependencies": {
     "electron": "6.0.1",
