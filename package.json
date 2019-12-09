@@ -38,7 +38,7 @@
     "ship": "yarn publish --registry=https://registry.yarnpkg.com"
   },
   "devDependencies": {
-    "electron": "7.1.2",
+    "electron": "7.1.3",
     "standard": "14.3.1"
   },
   "engines": {
