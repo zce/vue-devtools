@@ -35,7 +35,7 @@
     "lint": "standard --fix",
     "test": "yarn lint && electron example/usage",
     "preship": "yarn test && yarn build",
-    "ship": "yarn"
+    "ship": "yarn publish"
   },
   "devDependencies": {
     "electron": "8.2.0",
