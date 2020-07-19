@@ -35,10 +35,10 @@
     "lint": "standard --fix",
     "test": "yarn lint && electron example/usage",
     "preship": "yarn test && yarn build",
-    "ship": "yarn publish --registry=https://registry.yarnpkg.com"
+    "ship": "yarn"
   },
   "devDependencies": {
-    "electron": "7.1.5",
+    "electron": "8.2.0",
     "standard": "14.3.1"
   },
   "engines": {
@@ -49,5 +49,8 @@
       "source",
       "vender"
     ]
+  },
+  "publishConfig": {
+    "registry": "https://registry.yarnpkg.com"
   }
 }
