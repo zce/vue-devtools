@@ -334,10 +334,10 @@ duplexer3@^0.1.4:
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
   integrity sha1-7gHdHKwO08vH/b6jfcCo8c4ALOI=
 
-electron@8.2.0:
-  version "8.2.0"
-  resolved "https://registry.npm.taobao.org/electron/download/electron-8.2.0.tgz?cache=0&sync_timestamp=1594928557044&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Felectron%2Fdownload%2Felectron-8.2.0.tgz#f3e3de23a6178b5ad7baa70f4814d6332a3212c2"
-  integrity sha1-8+PeI6YXi1rXuqcPSBTWMyoyEsI=
+electron@8.2.4:
+  version "8.2.4"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-8.2.4.tgz#c4e51ca8e84b5a5beaaabdae1024bd52ba487ba4"
+  integrity sha512-Lle0InIgSAHZxD5KDY0wZ1A2Zlc6GHwMhAxoHMzn05mndyP1YBkCYHc0TDDofzUTrsLFofduPjlknO5Oj9fTPA==
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^12.0.12"

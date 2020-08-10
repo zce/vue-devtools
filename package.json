@@ -38,7 +38,7 @@
     "ship": "yarn publish"
   },
   "devDependencies": {
-    "electron": "8.2.0",
+    "electron": "8.2.4",
     "standard": "14.3.1"
   },
   "engines": {
