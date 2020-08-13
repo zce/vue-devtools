@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "electron": "8.2.0",
-    "standard": "14.3.1"
+    "standard": "14.3.4"
   },
   "engines": {
     "node": ">=6"
